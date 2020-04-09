@@ -45,7 +45,8 @@ async def scan(url):
                     u = 'https://'+url+':'+str(p)
                 else:
                     u = 'http://'+url+':'+str(p)
-                async with aiohttp.ClientSession() as session:
+		timeout = aiohttp.ClientTimeout(total=1)
+                async with aiohttp.ClientSession(timeout=timeout) as session:
                     res = await fetch(session, u)
                     print(u+'\t'+res)
                     result.append(u+'\t'+str(res)+'\n')
